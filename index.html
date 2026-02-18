@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Guest Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Padauk', sans-serif;
+            background-color:#FFA3A3A3;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10 px-4">
+
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-6 mb-6 text-center border-t-4 border-indigo-500">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">မိမိနှင့်အတူတူနေသော Hotel အခန်းဖော်များရှာဖွေခြင်း</h1>
+        <p class="text-gray-500 text-sm">ID နံပါတ် (သို့မဟုတ်) အခန်းနံပါတ် ရိုက်ထည့်၍ ရှာဖွေပါ</p>
+    </div>
+
+    <div class="w-full max-w-md mb-8">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="block w-full pl-10 pr-4 py-4 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-lg transition duration-150 ease-in-out shadow-sm" 
+                placeholder="ID (သို့) အခန်းနံပါတ် ရိုက်ပါ..." 
+                inputmode="numeric"
+                oninput="searchGuests()"
+            >
+        </div>
+    </div>
+
+    <div id="resultsArea" class="w-full max-w-md space-y-4">
+        <div class="text-center text-gray-500 mt-10">
+            <p>ID နံပါတ်ရိုက်ထည့်ပါက အခန်းတူသူများကိုပါ ပြပေးပါမည်</p>
+        </div>
+    </div>
+
+    <script>
+        // Data from the uploaded image
+        const guestData = [
+            { no: 1, id: "671004", name: "Ye Htet Myo", nameTh: "แย แทท เมียว", phone: "080-486-1689", room: "7060", floor: "7" },
+            { no: 2, id: "960017", name: "MR.PYI SAN", nameTh: "นาย ปี ซัน", phone: "099-729-4213", room: "7060", floor: "7" },
+            { no: 3, id: "960028", name: "MR.YE THET MIN", nameTh: "นาย แย แท็ด มิน", phone: "082-545-7608", room: "7060", floor: "7" },
+            
+            { no: 1, id: "960007", name: "MR.AUNG WIN HTIKE", nameTh: "นาย อ่าว วิน ไท้", phone: "091-790-7142", room: "7070", floor: "7" },
+            { no: 2, id: "960008", name: "MR.YE HTET AUNG", nameTh: "นาย แย แท็ด อ่าว", phone: "064-046-2235", room: "7070", floor: "7" },
+            { no: 3, id: "960009", name: "MR.SOE MIN TUN", nameTh: "นาย โซ มิน ทูน", phone: "091-724-3307", room: "7070", floor: "7" },
+
+            { no: 1, id: "960010", name: "MR.THANT ZIN MOE", nameTh: "นาย ดิน ซิน โม", phone: "096-771-2027", room: "7078", floor: "7" },
+            { no: 2, id: "960011", name: "MR.NYEIN CHAN AUNG", nameTh: "นาย เงง ซัน อ่าว", phone: "094-130-7082", room: "7078", floor: "7" },
+            { no: 3, id: "960012", name: "MR.ANNAWAR HTOO", nameTh: "นาย อะนอ วา ทู", phone: "082-583-2713", room: "7078", floor: "7" },
+
+            { no: 1, id: "960023", name: "MR.SHINE HTET ZAW", nameTh: "นาย ชาย แท็ด ซอ", phone: "064-407-0603", room: "7080", floor: "7" },
+            { no: 2, id: "960013", name: "MR.LA PYAE WONN", nameTh: "นาย ละ เปย วน", phone: "096-910-1743", room: "7080", floor: "7" },
+            { no: 3, id: "960014", name: "MR.NAY LIN AUNG", nameTh: "นาย เน วิน อ่าว", phone: "099-459-2231", room: "7080", floor: "7" },
+
+            { no: 1, id: "960015", name: "MR.SAW PHYO LINN AUNG", nameTh: "นาย ซอ ฟิว ลิน อ่าว", phone: "061-962-1910", room: "7082", floor: "7" },
+            { no: 2, id: "960016", name: "MR.NYI BWAR", nameTh: "นาย งี บัว", phone: "097-317-8173", room: "7082", floor: "7" },
+            { no: 3, id: "960006", name: "MR.ZIN MIN THET", nameTh: "นาย ซิน มิน ไท้", phone: "099-124-1550", room: "7082", floor: "7" },
+
+            { no: 1, id: "7160585", name: "Ko Ma Ba", nameTh: "โค มา เบ (โทน)", phone: "099-385-6601", room: "7073", floor: "7" },
+            { no: 2, id: "960001", name: "MR.TUN MYAT THU", nameTh: "นาย ทูน เมี้ยะ ตู", phone: "083-464-2604", room: "7073", floor: "7" },
+            { no: 3, id: "960002", name: "MR.PHYO THIHA AUNG", nameTh: "นาย พิว ตีฮะ อ่าว", phone: "064-867-7031", room: "7073", floor: "7" },
+
+            { no: 1, id: "960021", name: "MR.KHANT NYAR AUNG", nameTh: "นาย คั้น งา อ่าว", phone: "096-785-2259", room: "6059", floor: "6" },
+            { no: 2, id: "960022", name: "MR.MIN KHANT AUNG", nameTh: "นาย มิน คั้น อ่าว", phone: "064-085-0142", room: "6059", floor: "6" },
+            { no: 3, id: "960027", name: "MR.PAING SOE OO", nameTh: "นาย ปาย โซ อู", phone: "084-031-3520", room: "6059", floor: "6" },
+
+            { no: 1, id: "960030", name: "MR.LA MIN THURAIN", nameTh: "นาย ละ มิน ตูเรง", phone: "096-621-6746", room: "6061", floor: "6" },
+            { no: 2, id: "960031", name: "MR.NAING AUNG TUN", nameTh: "นาย นัย อ่าว ทูน", phone: "095-821-9756", room: "6061", floor: "6" },
+            { no: 3, id: "960032", name: "MR.KYAW ZIN HTWE", nameTh: "นาย จอ ซิน ทวย", phone: "096-319-4825", room: "6061", floor: "6" }
+        ];
+
+        function searchGuests() {
+            const input = document.getElementById('searchInput').value.trim();
+            const resultsArea = document.getElementById('resultsArea');
+            resultsArea.innerHTML = ''; // Clear previous results
+
+            if (input.length === 0) {
+                resultsArea.innerHTML = `
+                    <div class="text-center text-gray-500 mt-10 animate-pulse">
+                        <p>ID နံပါတ် (သို့) အခန်းနံပါတ် ရိုက်ထည့်ပါ</p>
+                    </div>`;
+                return;
+            }
+
+            let matchedGuests = [];
+            let searchMessage = "";
+
+            // LOGIC: Check if input is ID first
+            const foundPerson = guestData.find(guest => guest.id === input);
+
+            if (foundPerson) {
+                // If ID found, get that person's room, and find EVERYONE in that room
+                const roomNumber = foundPerson.room;
+                matchedGuests = guestData.filter(guest => guest.room === roomNumber);
+                searchMessage = `<span class="text-indigo-600 font-bold">${foundPerson.name} (ID: ${input})</span> ၏ အခန်းနံပါတ် <span class="font-bold text-gray-800">${roomNumber}</span> တွင် နေထိုင်သူများ`;
+            } else {
+                // If not ID, try to find by Room Number (starts with)
+                matchedGuests = guestData.filter(guest => guest.room.startsWith(input));
+                if (matchedGuests.length > 0) {
+                     searchMessage = `အခန်းနံပါတ် <span class="font-bold text-gray-800">${input}</span> တွင် နေထိုင်သူများ`;
+                }
+            }
+
+            if (matchedGuests.length > 0) {
+                // Show result header
+                const countDiv = document.createElement('div');
+                countDiv.className = "px-2 pb-2 text-sm text-gray-600 border-b";
+                countDiv.innerHTML = `
+                    <div class="flex justify-between items-end">
+                        <div class="text-xs">${searchMessage}</div>
+                        <div class="font-bold whitespace-nowrap">စုစုပေါင်း (${matchedGuests.length}) ဦး</div>
+                    </div>
+                `;
+                resultsArea.appendChild(countDiv);
+
+                matchedGuests.forEach(guest => {
+                    // Highlight the card if it matches the exact search ID
+                    const isSearchedID = guest.id === input;
+                    const borderClass = isSearchedID ? "border-indigo-600 ring-2 ring-indigo-200" : "border-gray-200";
+                    const bgClass = isSearchedID ? "bg-indigo-50" : "bg-white";
+
+                    const card = document.createElement('div');
+                    card.className = `${bgClass} rounded-lg shadow-md p-5 border-l-4 ${isSearchedID ? 'border-l-indigo-600' : 'border-l-gray-400'} transform transition hover:-translate-y-1 hover:shadow-lg duration-200`;
+                    
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-lg font-bold text-gray-800">${guest.name} ${isSearchedID ? '<span class="text-xs bg-indigo-600 text-white px-2 py-0.5 rounded ml-2">Selected</span>' : ''}</h2>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Floor ${guest.floor}</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-3">${guest.nameTh}</p>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center text-gray-700 bg-gray-100 p-2 rounded">
+                                <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                <span class="font-medium">${guest.phone}</span>
+                            </div>
+                            <div class="flex justify-between mt-2">
+                                <div class="flex items-center text-gray-600">
+                                    <span class="text-xs uppercase text-gray-400 mr-2">ID:</span>
+                                    <span class="font-mono font-semibold text-gray-700">${guest.id}</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <span class="text-xs uppercase text-gray-400 mr-2">Room:</span>
+                                    <span class="font-bold text-indigo-600 text-lg">${guest.room}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    resultsArea.appendChild(card);
+                });
+            } else {
+                resultsArea.innerHTML = `
+                    <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-center">
+                        <p>ID (သို့) အခန်းနံပါတ် <b>${input}</b> ရှာမတွေ့ပါ</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
