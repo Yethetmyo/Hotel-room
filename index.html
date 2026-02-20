@@ -47,37 +47,37 @@
     <script>
         // Data from the uploaded image
         const guestData = [
-            { no: 1, id: "671004", name: "Ye Htet Myo", nameTh: "แย แทท เมียว", phone: "080-486-1689", room: "7060", floor: "7" },
-            { no: 2, id: "960017", name: "MR.PYI SAN", nameTh: "นาย ปี ซัน", phone: "099-729-4213", room: "7060", floor: "7" },
-            { no: 3, id: "960028", name: "MR.YE THET MIN", nameTh: "นาย แย แท็ด มิน", phone: "082-545-7608", room: "7060", floor: "7" },
+            { no: 1, id: "671004", name: "Ye Htet Myo", nameTh: "แย แทท เมียว", phone: "080-486-1689", room: "7060", floor: "7", BUS: "5" },
+            { no: 2, id: "960017", name: "MR.PYI SAN", nameTh: "นาย ปี ซัน", phone: "099-729-4213", room: "7060", floor: "7", BUS: "5" },
+            { no: 3, id: "960028", name: "MR.YE THET MIN", nameTh: "นาย แย แท็ด มิน", phone: "082-545-7608", room: "7060", floor: "7", BUS: "5" },
             
-            { no: 1, id: "960007", name: "MR.AUNG WIN HTIKE", nameTh: "นาย อ่าว วิน ไท้", phone: "091-790-7142", room: "7070", floor: "7" },
-            { no: 2, id: "960008", name: "MR.YE HTET AUNG", nameTh: "นาย แย แท็ด อ่าว", phone: "064-046-2235", room: "7070", floor: "7" },
-            { no: 3, id: "960009", name: "MR.SOE MIN TUN", nameTh: "นาย โซ มิน ทูน", phone: "091-724-3307", room: "7070", floor: "7" },
+            { no: 1, id: "960007", name: "MR.AUNG WIN HTIKE", nameTh: "นาย อ่าว วิน ไท้", phone: "091-790-7142", room: "7070", floor: "7", BUS: "5" },
+            { no: 2, id: "960008", name: "MR.YE HTET AUNG", nameTh: "นาย แย แท็ด อ่าว", phone: "064-046-2235", room: "7070", floor: "7", BUS: "5" },
+            { no: 3, id: "960009", name: "MR.SOE MIN TUN", nameTh: "นาย โซ มิน ทูน", phone: "091-724-3307", room: "7070", floor: "7", BUS: "5" },
 
-            { no: 1, id: "960010", name: "MR.THANT ZIN MOE", nameTh: "นาย ดิน ซิน โม", phone: "096-771-2027", room: "7078", floor: "7" },
-            { no: 2, id: "960011", name: "MR.NYEIN CHAN AUNG", nameTh: "นาย เงง ซัน อ่าว", phone: "094-130-7082", room: "7078", floor: "7" },
-            { no: 3, id: "960012", name: "MR.ANNAWAR HTOO", nameTh: "นาย อะนอ วา ทู", phone: "082-583-2713", room: "7078", floor: "7" },
+            { no: 1, id: "960010", name: "MR.THANT ZIN MOE", nameTh: "นาย ดิน ซิน โม", phone: "096-771-2027", room: "7078", floor: "7", BUS: "5" },
+            { no: 2, id: "960011", name: "MR.NYEIN CHAN AUNG", nameTh: "นาย เงง ซัน อ่าว", phone: "094-130-7082", room: "7078", floor: "7", BUS: "5" },
+            { no: 3, id: "960012", name: "MR.ANNAWAR HTOO", nameTh: "นาย อะนอ วา ทู", phone: "082-583-2713", room: "7078", floor: "7", BUS: "5" },
 
-            { no: 1, id: "960023", name: "MR.SHINE HTET ZAW", nameTh: "นาย ชาย แท็ด ซอ", phone: "064-407-0603", room: "7080", floor: "7" },
-            { no: 2, id: "960013", name: "MR.LA PYAE WONN", nameTh: "นาย ละ เปย วน", phone: "096-910-1743", room: "7080", floor: "7" },
-            { no: 3, id: "960014", name: "MR.NAY LIN AUNG", nameTh: "นาย เน วิน อ่าว", phone: "099-459-2231", room: "7080", floor: "7" },
+            { no: 1, id: "960023", name: "MR.SHINE HTET ZAW", nameTh: "นาย ชาย แท็ด ซอ", phone: "064-407-0603", room: "7080", floor: "7", BUS: "7" },
+            { no: 2, id: "960013", name: "MR.LA PYAE WONN", nameTh: "นาย ละ เปย วน", phone: "096-910-1743", room: "7080", floor: "7", BUS: "5" },
+            { no: 3, id: "960014", name: "MR.NAY LIN AUNG", nameTh: "นาย เน วิน อ่าว", phone: "099-459-2231", room: "7080", floor: "7", BUS: "5" },
 
-            { no: 1, id: "960015", name: "MR.SAW PHYO LINN AUNG", nameTh: "นาย ซอ ฟิว ลิน อ่าว", phone: "061-962-1910", room: "7082", floor: "7" },
-            { no: 2, id: "960016", name: "MR.NYI BWAR", nameTh: "นาย งี บัว", phone: "097-317-8173", room: "7082", floor: "7" },
-            { no: 3, id: "960006", name: "MR.ZIN MIN THET", nameTh: "นาย ซิน มิน ไท้", phone: "099-124-1550", room: "7082", floor: "7" },
+            { no: 1, id: "960015", name: "MR.SAW PHYO LINN AUNG", nameTh: "นาย ซอ ฟิว ลิน อ่าว", phone: "061-962-1910", room: "7082", floor: "7", BUS: "5" },
+            { no: 2, id: "960016", name: "MR.NYI BWAR", nameTh: "นาย งี บัว", phone: "097-317-8173", room: "7082", floor: "7", BUS: "5" },
+            { no: 3, id: "960006", name: "MR.ZIN MIN THET", nameTh: "นาย ซิน มิน ไท้", phone: "099-124-1550", room: "7082", floor: "7", BUS: "5" },
 
-            { no: 1, id: "7160585", name: "Ko Ma Ba", nameTh: "โค มา เบ (โทน)", phone: "099-385-6601", room: "7073", floor: "7" },
-            { no: 2, id: "960001", name: "MR.TUN MYAT THU", nameTh: "นาย ทูน เมี้ยะ ตู", phone: "083-464-2604", room: "7073", floor: "7" },
-            { no: 3, id: "960002", name: "MR.PHYO THIHA AUNG", nameTh: "นาย พิว ตีฮะ อ่าว", phone: "064-867-7031", room: "7073", floor: "7" },
+            { no: 1, id: "7160585", name: "Ko Ma Ba", nameTh: "โค มา เบ (โทน)", phone: "099-385-6601", room: "7073", floor: "7", BUS: "7" },
+            { no: 2, id: "960001", name: "MR.TUN MYAT THU", nameTh: "นาย ทูน เมี้ยะ ตู", phone: "083-464-2604", room: "7073", floor: "7", BUS: "5" },
+            { no: 3, id: "960002", name: "MR.PHYO THIHA AUNG", nameTh: "นาย พิว ตีฮะ อ่าว", phone: "064-867-7031", room: "7073", floor: "7", BUS: "5" },
 
-            { no: 1, id: "960021", name: "MR.KHANT NYAR AUNG", nameTh: "นาย คั้น งา อ่าว", phone: "096-785-2259", room: "6059", floor: "6" },
-            { no: 2, id: "960022", name: "MR.MIN KHANT AUNG", nameTh: "นาย มิน คั้น อ่าว", phone: "064-085-0142", room: "6059", floor: "6" },
-            { no: 3, id: "960027", name: "MR.PAING SOE OO", nameTh: "นาย ปาย โซ อู", phone: "084-031-3520", room: "6059", floor: "6" },
+            { no: 1, id: "960021", name: "MR.KHANT NYAR AUNG", nameTh: "นาย คั้น งา อ่าว", phone: "096-785-2259", room: "6059", floor: "6", BUS: "7" },
+            { no: 2, id: "960022", name: "MR.MIN KHANT AUNG", nameTh: "นาย มิน คั้น อ่าว", phone: "064-085-0142", room: "6059", floor: "6", BUS: "7" },
+            { no: 3, id: "960027", name: "MR.PAING SOE OO", nameTh: "นาย ปาย โซ อู", phone: "084-031-3520", room: "6059", floor: "6", BUS: "7" },
 
-            { no: 1, id: "960030", name: "MR.LA MIN THURAIN", nameTh: "นาย ละ มิน ตูเรง", phone: "096-621-6746", room: "6061", floor: "6" },
-            { no: 2, id: "960031", name: "MR.NAING AUNG TUN", nameTh: "นาย นัย อ่าว ทูน", phone: "095-821-9756", room: "6061", floor: "6" },
-            { no: 3, id: "960032", name: "MR.KYAW ZIN HTWE", nameTh: "นาย จอ ซิน ทวย", phone: "096-319-4825", room: "6061", floor: "6" }
+            { no: 1, id: "960030", name: "MR.LA MIN THURAIN", nameTh: "นาย ละ มิน ตูเรง", phone: "096-621-6746", room: "6061", floor: "6", BUS: "7" },
+            { no: 2, id: "960031", name: "MR.NAING AUNG TUN", nameTh: "นาย นัย อ่าว ทูน", phone: "095-821-9756", room: "6061", floor: "6", BUS: "7" },
+            { no: 3, id: "960032", name: "MR.KYAW ZIN HTWE", nameTh: "นาย จอ ซิน ทวย", phone: "096-319-4825", room: "6061", floor: "6", BUS: "7" }
         ];
 
         function searchGuests() {
